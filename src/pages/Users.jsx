@@ -6,6 +6,24 @@ function Users() {
   const { user } = useAuthContext();
 
   const [users, setUsers] = useState([]);
+  const [initial, setInitial] = useState(0);
+  const [final, setFinal] = useState(10);
+  const [page, setPage] = useState(1);
+
+  const nextBtn = () => {
+    if (final < users.length) {
+        setInitial(initial + 10);
+        setFinal(final + 10);
+        setPage(page + 1);
+    }
+  }
+  const prevBtn = () => {
+    if (initial > 0) {
+        setInitial(initial - 10);
+        setFinal(final - 10);
+        setPage(page - 1);
+    }
+  }
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -16,7 +34,7 @@ function Users() {
       if (res.ok) {
         setUsers([
           ...users,
-          ...json.data.slice(0, 10).map((user) => ({
+          ...json.data.map((user) => ({
             name: user.first_name + " " + user.last_name,
             email: user.email,
           })),
@@ -52,7 +70,7 @@ function Users() {
         </thead>
         <tbody className="text-sm font-light text-gray-600">
             {users ? (
-                users.slice(0, 10).map((user, i) => (
+                users.slice(initial, final).map((user, i) => (
                     <tr key={i} className="border-b-2">
                         <td className="py-4 px-6">
                             <h3 className="font-semibold">{user.name}</h3>
@@ -77,9 +95,9 @@ function Users() {
         </tbody>
       </table>
       <div className="flex justify-between items-center p-3 border-t-0 border-2">
-        <button className="px-4 py-2 rounded-[10px] hover:bg-indigo-500 bg-white hover:text-white flex items-center shadow-[0_1px_3px_1px_rgba(0,0,0,0.3)]">Previous</button>
-        <span>Page 1 of 10</span>
-        <button className="px-4 py-2 rounded-[10px] hover:bg-indigo-500 bg-white hover:text-white flex items-center shadow-[0_1px_3px_1px_rgba(0,0,0,0.3)]">Next</button>
+        <button className={`px-4 py-2 rounded-[10px] ${page === 1 ? 'bg-gray-300 cursor-not-allowed' : 'hover:bg-indigo-500 bg-white hover:text-white'} flex items-center shadow-[0_1px_3px_1px_rgba(0,0,0,0.3)]`} onClick={prevBtn}>Previous</button>
+        <span>Page {page} of {Math.ceil(users.length / 10)}</span>
+        <button className={`px-4 py-2 rounded-[10px] ${page === (users.length / 10) ? 'bg-gray-300 cursor-not-allowed' : 'hover:bg-indigo-500 bg-white hover:text-white'} flex items-center shadow-[0_1px_3px_1px_rgba(0,0,0,0.3)]`} onClick={nextBtn}>Next</button>
       </div>
     </div>
   );
