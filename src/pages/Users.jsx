@@ -76,6 +76,11 @@ function Users() {
             }
         </tbody>
       </table>
+      <div className="flex justify-between items-center p-3 border-t-0 border-2">
+        <button className="px-4 py-2 rounded-[10px] hover:bg-indigo-500 bg-white hover:text-white flex items-center shadow-[0_1px_3px_1px_rgba(0,0,0,0.3)]">Previous</button>
+        <span>Page 1 of 10</span>
+        <button className="px-4 py-2 rounded-[10px] hover:bg-indigo-500 bg-white hover:text-white flex items-center shadow-[0_1px_3px_1px_rgba(0,0,0,0.3)]">Next</button>
+      </div>
     </div>
   );
 }
