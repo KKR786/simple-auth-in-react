@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import {Link} from 'react-router-dom'
 import { useLogin } from "../customHooks/useLogin";
+import logo from '../logo.jpg'
 
 function Login() {
     const [email, setEmail] = useState('')
@@ -16,7 +17,9 @@ function Login() {
   return (
     <div className='h-[100vh] flex items-center justify-center'>
       <div className="shadow-[0_1px_5px_2px_rgba(0,0,0,0.3)] mx-0 my-auto flex items-center justify-center flex-col p-[50px] rounded-[10px] w-[450px]">
-        <div className="logo"></div>
+        <div className="logo">
+            <img src={logo} alt="logo" className="w-[130px] mb-3"/>
+        </div>
         <p><b>Sign in to join with Stack</b></p>
         <form onSubmit={handleSubmit} className='flex flex-col w-full p-[15px] gap-y-8' method='POST'>
             <div className='flex flex-col gap-y-2'>

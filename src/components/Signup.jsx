@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useRegister } from "../customHooks/useRegister";
+import logo from '../logo.jpg'
 
 function Signup() {
   const [email, setEmail] = useState("");
@@ -36,7 +37,9 @@ function Signup() {
   return (
     <div className="h-[100vh] flex items-center justify-center">
       <div className="shadow-[0_1px_5px_2px_rgba(0,0,0,0.3)] mx-0 my-auto flex items-center justify-center flex-col p-[50px] rounded-[10px] w-[450px]">
-        <div className="logo"></div>
+        <div className="logo">
+            <img src={logo} alt="logo" className="w-[130px] mb-3"/>
+        </div>
         <p>
           <b>Sign up to join with Stack</b>
         </p>
